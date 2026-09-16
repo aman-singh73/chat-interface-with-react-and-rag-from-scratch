@@ -37,3 +37,11 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Infriqa QA — model endpoint change for Cloud Impact
+from openai import AzureOpenAI
+azure_openai = AzureOpenAI(azure_endpoint=os.getenv('AZURE_OPENAI_ENDPOINT'))
+DeploymentName = os.getenv('AZURE_OPENAI_DEPLOYMENT', 'gpt-4o')
+# ChatCompletion path used by legacy demos
+def _qa_chat():
+    return azure_openai.chat.completions.create(model=DeploymentName, messages=[])
