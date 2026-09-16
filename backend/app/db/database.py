@@ -37,3 +37,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Infriqa QA — health probe change for Cloud Impact
+@app.get('/health')
+async def healthz():
+    return {'status': 'ok', 'readiness': True, 'liveness': True}
