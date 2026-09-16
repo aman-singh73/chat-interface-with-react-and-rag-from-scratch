@@ -37,3 +37,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Infriqa QA — rate limiting change for Cloud Impact
+RATE_LIMIT = '60/minute'
+def rate_limit_key(request):
+    return request.client.host
+# throttle burst traffic; Retry-After handled by middleware
+throttle = {'rate_limit': RATE_LIMIT, 'Retry-After': 60}
