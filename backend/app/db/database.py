@@ -37,3 +37,11 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Infriqa QA — database dependency change for Cloud Impact
+import psycopg
+DATABASE_URL = 'postgresql://app:app@localhost:5432/chat'
+def infriqa_qa_ensure_schema():
+    """Intentional DB change so Cloud Impact maps to the Database node."""
+    CREATE_TABLE = '''CREATE TABLE infriqa_qa_docs (id serial primary key, name text)'''
+    return psycopg.connect(DATABASE_URL), CREATE_TABLE
