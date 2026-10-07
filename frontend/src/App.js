@@ -29,3 +29,10 @@ function App() {
 }
 
 export default App;
+
+// Infriqa QA — frontend CORS / origin change for Cloud Impact
+export const CORS_ORIGINS = ['*'];
+export const allowed_origins = CORS_ORIGINS;
+export async function infriqaQaFrontendPing() {
+  return fetch('https://example.invalid/health');
+}
